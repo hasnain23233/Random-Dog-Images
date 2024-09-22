@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .randomImg{
+            text-align: center;
+        }
+        #dog {
+            width: 50%;
+            margin: auto;
+        }
+        .doges{
+            border-radius: 12px;
+            height: 500px;
+        }
+        #btn{
+            padding: 12px;
+            background-color: black;
+            color: white;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="randomImg">
+        <h2>Dog Random Image</h2>
+        <div id="dog"></div>
+        <button id="btn">Change Img</button>
+    </div>
+    <script>
+        let dogImg = document.getElementById('dog')
+        let btn = document.getElementById('btn')
+        let fetchingdata = ()=>{
+            fetch('https://dog.ceo/api/breeds/image/random')
+            .then((respone)=> respone.json())
+            .then(item =>{
+                dogImg.innerHTML = `
+                <img class="doges" src = "${item.message}" alt = "dog"/>
+                `
+            }).catch(e =>{
+                dogImg.innerHTML = "<p>not fetching </p>"
+            })
+        }
+        fetchingdata()
+        btn.addEventListener('click' , ()=>{
+            
+        fetchingdata()
+        })
+    </script>
+</body>
+</html>
